@@ -21,8 +21,6 @@ function AddCustomer(props) {
             city: props.params.data.city,
             email: props.params.data.email,
             phone: props.params.data.phone
-
-            
         })
         setOpen(true);
     };

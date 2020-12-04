@@ -6,6 +6,7 @@ import Addcustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
 import  Button  from '@material-ui/core/Button';
 import  Snackbar from '@material-ui/core/Snackbar';
+import Exerciseslist from './Exerciseslist';
 
 function Customerlist() {
 
@@ -18,7 +19,8 @@ function Customerlist() {
     const getCustomers = () => {
         fetch('https://customerrest.herokuapp.com/api/customers')
         .then(response => response.json())
-        .then(data => setCustomers(data.content)) 
+        .then(data => {setCustomers(data.content)
+             console.log(data.content)}) 
         .then(err => console.log(err))
     }
 
@@ -26,6 +28,7 @@ function Customerlist() {
         getCustomers();
     }, []);
 
+    
     const addCustomer = (newCustomer) => {
         fetch('https://customerrest.herokuapp.com/api/customers', {
             method: 'POST',
@@ -39,11 +42,11 @@ function Customerlist() {
     const updateCustomer = (link, customer) => {
         fetch(link, {
             method: 'PUT',
-            headers: {'Content-type' : 'application/json'},
+            headers: {'Content-type' : 'application/json' },
             body: JSON.stringify(customer)
         })
         .then(_ => gridRef.current.refreshCells({rowNodes: getCustomers()}))
-        .then(_ => SetMsg('Car was updated succesfully'))
+        .then(_ => SetMsg('Customer was updated succesfully'))
         .then(_ => setOpen(true))
         .catch(err => console.log(err))
     }
@@ -74,14 +77,13 @@ function Customerlist() {
         {headerName: 'Phone', field: 'phone', sortable: true, filter: true},
         {
             headerName: '',
-            field: 'links.[0].href',
+            field: 'content.links[0].href',
             width: 90,
             cellRendererFramework: params => <EditCustomer updateCustomer={updateCustomer} params={params}/>
         },
         {
             headerName: '',
-            field: 'links.[0].href',
-            width: 90,
+            field: 'content.links[0].href',
             cellRendererFramework: params => 
             <Button color="secondary" size="small" onClick={()=> deleteCustomer(params.value)}>
                 Delete
