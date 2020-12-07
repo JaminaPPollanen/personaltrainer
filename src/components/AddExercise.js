@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 function AddExercise(props) {
-    const [exercise, setExercise] = useState({date: '', duration: '', activity: '', customer: ''});
+    const [exercise, setExercise] = useState({date: '', duration: '', activity: ''});
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -57,14 +57,6 @@ function AddExercise(props) {
                  margin="dense"
                  name="activity"
                  value={exercise.activity}
-                 onChange={inputChanged}
-                 label="activity"
-                 fullWidth
-                />
-                <TextField
-                 margin="dense"
-                 name="activity"
-                 value={props.customer.firstname}
                  onChange={inputChanged}
                  label="activity"
                  fullWidth

@@ -6,7 +6,7 @@ import Addcustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
 import  Button  from '@material-ui/core/Button';
 import  Snackbar from '@material-ui/core/Snackbar';
-import Exerciseslist from './Exerciseslist';
+import AddExercise from './AddExercise';
 
 function Customerlist() {
 
@@ -39,6 +39,18 @@ function Customerlist() {
         .catch(err => console.log(err))
     }
 
+    const addExercise= (link, exercise) => {
+        fetch(link, {
+            method: 'POST',
+            headers: {'Content-type' : 'application/json'},
+            body: JSON.stringify(exercise)
+        })
+        .then(_ => gridRef.current.refreshCells({rowNodes: getCustomers()}))
+        .then(_ => SetMsg('Exercise was added succesfully'))
+        .then(_ => setOpen(true))
+        .catch(err => console.log(err))
+    }
+
     const updateCustomer = (link, customer) => {
         fetch(link, {
             method: 'PUT',
@@ -53,7 +65,7 @@ function Customerlist() {
 
     const deleteCustomer = (link) => {
         if (window.confirm('Are you sure?')){
-            fetch(link, {
+            fetch(link[0].href, {
                 method: 'DELETE'
             })
             .then(_ => gridRef.current.refreshCells({rowNodes: getCustomers()}))
@@ -77,17 +89,23 @@ function Customerlist() {
         {headerName: 'Phone', field: 'phone', sortable: true, filter: true},
         {
             headerName: '',
-            field: 'content.links[0].href',
+            field: 'links',
             width: 90,
             cellRendererFramework: params => <EditCustomer updateCustomer={updateCustomer} params={params}/>
         },
         {
             headerName: '',
-            field: 'content.links[0].href',
+            field: 'links',
             cellRendererFramework: params => 
             <Button color="secondary" size="small" onClick={()=> deleteCustomer(params.value)}>
                 Delete
             </Button>
+        },
+        {
+            headerName: '',
+            field: 'links',
+            cellRendererFramework: params => <AddExercise addExercise={addExercise} params={params}/>
+
         }
     ]
 

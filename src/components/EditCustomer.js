@@ -5,9 +5,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import testUtils from 'react-dom/test-utils';
 
-function AddCustomer(props) {
+
+function EditCustomer(props) {
     const [customer, setCustomer] = useState({firstname: '', lastname: '', streetaddress: '', postcode: '', city: '', email: '', phone: ''});
     const [open, setOpen] = useState(false);
 
@@ -34,7 +34,7 @@ function AddCustomer(props) {
     }
 
     const handleSave = () => {
-        props.updateCustomer(customer);
+        props.updateCustomer(props.params.value[0].href, customer);
         console.log(customer);
         handleClose();
     }
@@ -117,4 +117,4 @@ function AddCustomer(props) {
     );
 }
 
-export default AddCustomer;
+export default EditCustomer;
