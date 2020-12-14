@@ -24,8 +24,12 @@ function AddExercise(props) {
     }
 
     const handleSave = () => {
-        props.addExercise(exercise);
-        console.log(exercise);
+        const newExercise = {
+            ...exercise, date: new Date(exercise.date),
+            customer: props.params.data.links[1].href,
+            };
+        console.log(props);
+        props.addExercise(newExercise);
         handleClose();
     }
 

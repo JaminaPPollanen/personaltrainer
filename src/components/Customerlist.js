@@ -39,8 +39,9 @@ function Customerlist() {
         .catch(err => console.log(err))
     }
 
-    const addExercise= (link, exercise) => {
-        fetch(link, {
+    const addExercise= (exercise) => {
+        console.log(exercise)
+        fetch("https://customerrest.herokuapp.com/api/trainings", {
             method: 'POST',
             headers: {'Content-type' : 'application/json'},
             body: JSON.stringify(exercise)

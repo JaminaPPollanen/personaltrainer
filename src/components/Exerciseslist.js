@@ -14,11 +14,12 @@ function Exerciseslist() {
     const gridRef = useRef();
 
     const getExercises = () => {
-        fetch('https://customerrest.herokuapp.com/api/trainings')
+        fetch('https://customerrest.herokuapp.com/gettrainings')
         .then(response => response.json())
-        .then(data => setExercises(data.content)) 
+        .then(data => setExercises(data)) 
         .then(err => console.log(err))
     }
+    console.log(exercises);
 
     useEffect(() => {
         getExercises();
@@ -29,7 +30,7 @@ function Exerciseslist() {
     }
     const deleteExercise = (link) => {
         if (window.confirm('Are you sure?')){
-            fetch(link[0].href, {
+            fetch(link, {
                 method: 'DELETE'
             })
             .then(_ => gridRef.current.refreshCells({rowNodes: getExercises()}))
@@ -44,12 +45,13 @@ function Exerciseslist() {
         {headerName: 'Duration', field: 'duration', sortable: true, filter: true},
         {headerName: 'Activity', field: 'activity', sortable: true, filter: true},
         {headerName: 'Customer', field: 'customer.firstname', sortable: true, filter: true},
+        {headerName: '', field: 'customer.lastname', sortable: true, filter: true},
         {
             headerName: '',
             field: 'links',
             cellRendererFramework: params => 
-            <Button color="secondary" size="small" onClick={()=> deleteExercise(params.value)}>
-                Delete training
+            <Button color="secondary" size="small" onClick={()=> deleteExercise("https://customerrest.herokuapp.com/api/trainings/" + params.data.id)}>
+                Delete 
             </Button>
         },
       ]
