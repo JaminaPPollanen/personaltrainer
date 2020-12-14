@@ -3,7 +3,7 @@ import Customerlist from './components/Customerlist';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import Exerciseslist from './components/Exerciseslist';
 
 
