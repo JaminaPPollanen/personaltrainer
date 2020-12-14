@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import React, {useState} from 'react';
 import Exerciseslist from './components/Exerciseslist';
+import CalendarPage from './components/CalendarPage';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
         </AppBar>
         {value ==='one' && <div> <Customerlist/></div>}
         {value ==='two' && <div> <Exerciseslist/></div>}
-        {value ==='three' && <div> <h1>Calendar</h1></div>}
+        {value ==='three' && <div> <CalendarPage/></div>}
         
     </div>
   );
