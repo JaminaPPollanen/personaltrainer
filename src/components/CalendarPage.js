@@ -13,7 +13,7 @@ const localizer = momentLocalizer(moment);
       getEvents()
   }, [])
 
-/*Seuraavassa metodissa on saatu suuri apu Samuli Peltosen ratkaisusta*/
+
 const getEvents = () => {
     fetch("https://customerrest.herokuapp.com/gettrainings")
     .then((response) => response.json())
